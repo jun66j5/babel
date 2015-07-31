@@ -255,6 +255,7 @@ def test_negotiate_locale():
             'ja_JP')
     assert core.negotiate_locale(['no', 'sv'], ['nb_NO', 'sv_SE']) == 'nb_NO'
 
+
 def test_parse_locale():
     assert core.parse_locale('zh_CN') == ('zh', 'CN', None, None)
     assert core.parse_locale('zh_Hans_CN') == ('zh', 'CN', 'Hans', None)
@@ -269,3 +270,9 @@ def test_parse_locale():
     assert core.parse_locale('en_US.UTF-8') == ('en', 'US', None, None)
     assert (core.parse_locale('de_DE.iso885915@euro') ==
             ('de', 'DE', None, None))
+
+
+def test_parse_locale_with_class_method():
+    locale = Locale.parse('zh_CN')
+    assert locale.language == 'zh'
+    assert locale.territory == 'CN'
